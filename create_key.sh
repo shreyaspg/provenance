@@ -4,12 +4,12 @@ echo "                                     Key Generator"
 echo "###################################################################################################################"
 
 function bin() {
-    cmd="docker run --rm -ti --name provenance-query provenanceio/provenance:v0.2.0 provenanced $1"
+    cmd="docker run -v /var/run/aesmd:/var/run/aesmd --device /dev/isgx:/dev/isgx --device /dev/gsgx:/dev/gsgx --rm -ti --name provenance-query shrys197/fx-private:testnetd $1"
     echo -e "\n$cmd"
     ${cmd}
 }
 function bin_with_keyring() {
-    cmd="docker run --rm -ti -v ${PWD}/testnet/keyring-test:/home/provenance/keyring-test --name provenance-query provenanceio/provenance:v0.2.0 provenanced $1"
+    cmd="docker run -v /var/run/aesmd:/var/run/aesmd --device /dev/isgx:/dev/isgx --device /dev/gsgx:/dev/gsgx --rm -ti -v ${PWD}/testnet/keyring-test:/home/provenance/keyring-test --name provenance-query shrys197/fx-private:testnetd $1"
     echo -e "\n$cmd"
     ${cmd}
 }
